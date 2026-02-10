@@ -20,8 +20,35 @@ h2 {
   flex: 1;
 }
 
-mat-form-field {
+.control-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input[type="text"] {
   width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+input[type="text"]:focus {
+  outline: 2px solid var(--mat-sys-primary, #1976d2);
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+.error {
+  color: #c62828;
+  font-size: 12px;
 }
 
 .spinner-row {
@@ -29,6 +56,22 @@ mat-form-field {
   align-items: center;
   gap: 12px;
   margin-top: 8px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  border-top-color: var(--mat-sys-primary, #1976d2);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .taken-list {

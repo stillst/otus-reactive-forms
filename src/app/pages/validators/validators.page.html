@@ -3,13 +3,13 @@
 <section class="demo-section">
   <h2>Required</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Required field</mat-label>
-      <input matInput [formControl]="requiredControl" />
+    <div class="control-wrap">
+      <label for="required-field">Required field</label>
+      <input id="required-field" type="text" [formControl]="requiredControl" />
       @if (requiredControl.hasError('required')) {
-        <mat-error>This field is required</mat-error>
+        <span class="error">This field is required</span>
       }
-    </mat-form-field>
+    </div>
     <app-control-state-display [control]="requiredControl" label="required" />
   </div>
 </section>
@@ -17,13 +17,13 @@
 <section class="demo-section">
   <h2>Email</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput [formControl]="emailControl" />
+    <div class="control-wrap">
+      <label for="email-field">Email</label>
+      <input id="email-field" type="text" [formControl]="emailControl" />
       @if (emailControl.hasError('email')) {
-        <mat-error>Please enter a valid email</mat-error>
+        <span class="error">Please enter a valid email</span>
       }
-    </mat-form-field>
+    </div>
     <app-control-state-display [control]="emailControl" label="email" />
   </div>
 </section>
@@ -31,16 +31,16 @@
 <section class="demo-section">
   <h2>MinLength(3)</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Username (min 3 chars)</mat-label>
-      <input matInput [formControl]="minLengthControl" />
+    <div class="control-wrap">
+      <label for="minlength-field">Username (min 3 chars)</label>
+      <input id="minlength-field" type="text" [formControl]="minLengthControl" />
       @if (minLengthControl.hasError('minlength')) {
-        <mat-error>
+        <span class="error">
           Minimum length is {{ minLengthControl.getError('minlength').requiredLength }},
           current: {{ minLengthControl.getError('minlength').actualLength }}
-        </mat-error>
+        </span>
       }
-    </mat-form-field>
+    </div>
     <app-control-state-display [control]="minLengthControl" label="minLength" />
   </div>
 </section>
@@ -48,13 +48,13 @@
 <section class="demo-section">
   <h2>Pattern (digits only)</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Phone (digits only)</mat-label>
-      <input matInput [formControl]="patternControl" />
+    <div class="control-wrap">
+      <label for="pattern-field">Phone (digits only)</label>
+      <input id="pattern-field" type="text" [formControl]="patternControl" />
       @if (patternControl.hasError('pattern')) {
-        <mat-error>Only digits are allowed</mat-error>
+        <span class="error">Only digits are allowed</span>
       }
-    </mat-form-field>
+    </div>
     <app-control-state-display [control]="patternControl" label="pattern" />
   </div>
 </section>
@@ -62,15 +62,15 @@
 <section class="demo-section">
   <h2>Custom Validator (forbiddenWord: "admin")</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Nickname</mat-label>
-      <input matInput [formControl]="customControl" />
+    <div class="control-wrap">
+      <label for="custom-field">Nickname</label>
+      <input id="custom-field" type="text" [formControl]="customControl" />
       @if (customControl.hasError('forbiddenWord')) {
-        <mat-error>
+        <span class="error">
           The word "{{ customControl.getError('forbiddenWord').word }}" is not allowed
-        </mat-error>
+        </span>
       }
-    </mat-form-field>
+    </div>
     <app-control-state-display [control]="customControl" label="custom" />
   </div>
 </section>

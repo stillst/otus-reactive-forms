@@ -20,12 +20,54 @@ h2 {
   flex: 1;
 }
 
-mat-form-field {
+.control-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input[type="text"] {
   width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+input[type="text"]:focus {
+  outline: 2px solid var(--mat-sys-primary, #1976d2);
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+.hint {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
 }
 
 .live-values {
   margin-top: 16px;
+}
+
+.btn {
+  padding: 6px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.btn:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .log-container {

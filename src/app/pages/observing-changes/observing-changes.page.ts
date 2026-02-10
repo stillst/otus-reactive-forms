@@ -2,11 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/cor
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
 import { ControlStateDisplay } from '../../shared/control-state-display';
 
 interface LogEntry {
@@ -17,16 +12,7 @@ interface LogEntry {
 
 @Component({
   selector: 'app-observing-changes-page',
-  imports: [
-    ReactiveFormsModule,
-    AsyncPipe,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatListModule,
-    MatButtonModule,
-    ControlStateDisplay,
-  ],
+  imports: [ReactiveFormsModule, AsyncPipe, ControlStateDisplay],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './observing-changes.page.html',
   styleUrl: './observing-changes.page.css',

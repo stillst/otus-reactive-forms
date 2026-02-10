@@ -9,23 +9,23 @@
 
   <div class="demo-row">
     <div>
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput [formControl]="usernameControl" />
+      <div class="control-wrap">
+        <label for="username-field">Username</label>
+        <input id="username-field" type="text" [formControl]="usernameControl" />
         @if (usernameControl.hasError('required')) {
-          <mat-error>Username is required</mat-error>
+          <span class="error">Username is required</span>
         }
         @if (usernameControl.hasError('minlength')) {
-          <mat-error>Minimum 3 characters</mat-error>
+          <span class="error">Minimum 3 characters</span>
         }
         @if (usernameControl.hasError('usernameTaken')) {
-          <mat-error>This username is already taken</mat-error>
+          <span class="error">This username is already taken</span>
         }
-      </mat-form-field>
+      </div>
 
       @if (usernameControl.status === 'PENDING') {
         <div class="spinner-row">
-          <mat-spinner diameter="20" />
+          <span class="spinner"></span>
           <span>Checking availability...</span>
         </div>
       }

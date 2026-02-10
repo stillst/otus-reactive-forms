@@ -2,67 +2,65 @@
 
 <section class="demo-section">
   <div class="demo-row">
-    <div>
-      <mat-form-field>
-        <mat-label>Demo field</mat-label>
-        <input matInput [formControl]="control" />
-        @if (control.hasError('required')) {
-          <mat-error>Required</mat-error>
-        }
-      </mat-form-field>
+    <div class="control-wrap">
+      <label for="demo-field">Demo field</label>
+      <input id="demo-field" type="text" [formControl]="control" />
+      @if (control.hasError('required')) {
+        <span class="error">Required</span>
+      }
     </div>
     <app-control-state-display [control]="control" label="control" />
   </div>
 </section>
 
-<mat-divider />
+<hr />
 
 <section class="demo-section">
   <h2>setValue / reset</h2>
   <div class="button-group">
-    <button mat-flat-button (click)="control.setValue('Hello!')">
+    <button class="btn btn-primary" (click)="control.setValue('Hello!')">
       setValue('Hello!')
     </button>
-    <button mat-flat-button (click)="control.reset()">
+    <button class="btn btn-primary" (click)="control.reset()">
       reset()
     </button>
-    <button mat-flat-button (click)="control.reset('initial')">
+    <button class="btn btn-primary" (click)="control.reset('initial')">
       reset('initial')
     </button>
   </div>
 </section>
 
-<mat-divider />
+<hr />
 
 <section class="demo-section">
   <h2>enable / disable</h2>
   <div class="button-group">
-    <button mat-flat-button (click)="control.disable()">disable()</button>
-    <button mat-flat-button (click)="control.enable()">enable()</button>
+    <button class="btn btn-primary" (click)="control.disable()">disable()</button>
+    <button class="btn btn-primary" (click)="control.enable()">enable()</button>
   </div>
 </section>
 
-<mat-divider />
+<hr />
 
 <section class="demo-section">
   <h2>markAsDirty / markAsPristine / markAsTouched / markAsUntouched</h2>
   <div class="button-group">
-    <button mat-stroked-button (click)="control.markAsDirty()">markAsDirty()</button>
-    <button mat-stroked-button (click)="control.markAsPristine()">markAsPristine()</button>
-    <button mat-stroked-button (click)="control.markAsTouched()">markAsTouched()</button>
-    <button mat-stroked-button (click)="control.markAsUntouched()">markAsUntouched()</button>
+    <button class="btn" (click)="control.markAsDirty()">markAsDirty()</button>
+    <button class="btn" (click)="control.markAsPristine()">markAsPristine()</button>
+    <button class="btn" (click)="control.markAsTouched()">markAsTouched()</button>
+    <button class="btn" (click)="control.markAsUntouched()">markAsUntouched()</button>
   </div>
 </section>
 
-<mat-divider />
+<hr />
 
 <section class="demo-section">
   <h2>setValidators / clearValidators</h2>
   <div class="button-group">
-    <button mat-stroked-button (click)="addRequired()">
+    <button class="btn" (click)="addRequired()">
       setValidators(Validators.required)
     </button>
-    <button mat-stroked-button (click)="removeValidators()">
+    <button class="btn" (click)="removeValidators()">
       clearValidators()
     </button>
   </div>

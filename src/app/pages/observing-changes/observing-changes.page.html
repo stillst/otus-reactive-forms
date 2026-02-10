@@ -3,10 +3,10 @@
 <section class="demo-section">
   <h2>valueChanges & statusChanges (async pipe)</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Email (required, email)</mat-label>
-      <input matInput [formControl]="emailControl" />
-    </mat-form-field>
+    <div class="control-wrap">
+      <label for="email-field">Email (required, email)</label>
+      <input id="email-field" type="text" [formControl]="emailControl" />
+    </div>
     <app-control-state-display [control]="emailControl" label="email" />
   </div>
 
@@ -19,11 +19,11 @@
 <section class="demo-section">
   <h2>debounceTime + distinctUntilChanged (search simulation)</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Search query</mat-label>
-      <input matInput [formControl]="searchControl" />
-      <mat-hint>Debounced (300ms) value appears below</mat-hint>
-    </mat-form-field>
+    <div class="control-wrap">
+      <label for="search-field">Search query</label>
+      <input id="search-field" type="text" [formControl]="searchControl" />
+      <span class="hint">Debounced (300ms) value appears below</span>
+    </div>
     <app-control-state-display [control]="searchControl" label="search" />
   </div>
   <p class="live-values"><strong>Debounced value:</strong> {{ debouncedValue() }}</p>
@@ -32,7 +32,7 @@
 <section class="demo-section">
   <h2>Change Log</h2>
   <p>All valueChanges and statusChanges from the email field are logged here.</p>
-  <button mat-stroked-button (click)="clearLog()">Clear Log</button>
+  <button class="btn" (click)="clearLog()">Clear Log</button>
   <div class="log-container">
     @for (entry of log(); track $index) {
       <div class="log-entry">

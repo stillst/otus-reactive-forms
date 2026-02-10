@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
 import { ControlStateDisplay } from '../../shared/control-state-display';
 
 function forbiddenWordValidator(forbidden: string) {
@@ -16,13 +13,7 @@ function forbiddenWordValidator(forbidden: string) {
 
 @Component({
   selector: 'app-validators-page',
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    ControlStateDisplay,
-  ],
+  imports: [ReactiveFormsModule, ControlStateDisplay],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './validators.page.html',
   styleUrl: './validators.page.css',
