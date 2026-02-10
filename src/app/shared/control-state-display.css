@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  vertical-align: top;
+}
+
+td:first-child {
+  font-weight: 500;
+  width: 120px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.status-valid {
+  color: #2e7d32;
+}
+
+.status-invalid {
+  color: #c62828;
+}
+
+.status-pending {
+  color: #ef6c00;
+}

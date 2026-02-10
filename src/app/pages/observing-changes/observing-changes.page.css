@@ -1,0 +1,57 @@
+.demo-section {
+  margin-bottom: 32px;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+.demo-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.demo-row > :first-child {
+  flex: 1;
+}
+
+.demo-row > app-control-state-display {
+  flex: 1;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.live-values {
+  margin-top: 16px;
+}
+
+.log-container {
+  max-height: 300px;
+  overflow-y: auto;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.log-entry {
+  font-family: monospace;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.log-entry .type-value {
+  color: #1565c0;
+}
+
+.log-entry .type-status {
+  color: #6a1b9a;
+}
+
+.log-entry .time {
+  color: rgba(0, 0, 0, 0.4);
+  margin-right: 8px;
+}

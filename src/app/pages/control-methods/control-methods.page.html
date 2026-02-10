@@ -1,0 +1,69 @@
+<h1>Control Methods</h1>
+
+<section class="demo-section">
+  <div class="demo-row">
+    <div>
+      <mat-form-field>
+        <mat-label>Demo field</mat-label>
+        <input matInput [formControl]="control" />
+        @if (control.hasError('required')) {
+          <mat-error>Required</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <app-control-state-display [control]="control" label="control" />
+  </div>
+</section>
+
+<mat-divider />
+
+<section class="demo-section">
+  <h2>setValue / reset</h2>
+  <div class="button-group">
+    <button mat-flat-button (click)="control.setValue('Hello!')">
+      setValue('Hello!')
+    </button>
+    <button mat-flat-button (click)="control.reset()">
+      reset()
+    </button>
+    <button mat-flat-button (click)="control.reset('initial')">
+      reset('initial')
+    </button>
+  </div>
+</section>
+
+<mat-divider />
+
+<section class="demo-section">
+  <h2>enable / disable</h2>
+  <div class="button-group">
+    <button mat-flat-button (click)="control.disable()">disable()</button>
+    <button mat-flat-button (click)="control.enable()">enable()</button>
+  </div>
+</section>
+
+<mat-divider />
+
+<section class="demo-section">
+  <h2>markAsDirty / markAsPristine / markAsTouched / markAsUntouched</h2>
+  <div class="button-group">
+    <button mat-stroked-button (click)="control.markAsDirty()">markAsDirty()</button>
+    <button mat-stroked-button (click)="control.markAsPristine()">markAsPristine()</button>
+    <button mat-stroked-button (click)="control.markAsTouched()">markAsTouched()</button>
+    <button mat-stroked-button (click)="control.markAsUntouched()">markAsUntouched()</button>
+  </div>
+</section>
+
+<mat-divider />
+
+<section class="demo-section">
+  <h2>setValidators / clearValidators</h2>
+  <div class="button-group">
+    <button mat-stroked-button (click)="addRequired()">
+      setValidators(Validators.required)
+    </button>
+    <button mat-stroked-button (click)="removeValidators()">
+      clearValidators()
+    </button>
+  </div>
+</section>

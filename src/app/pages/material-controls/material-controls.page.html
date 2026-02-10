@@ -1,0 +1,78 @@
+<h1>Material Controls</h1>
+
+<section class="demo-section">
+  <h2>mat-input</h2>
+  <div class="demo-row">
+    <mat-form-field>
+      <mat-label>Full name</mat-label>
+      <input matInput [formControl]="nameControl" />
+    </mat-form-field>
+    <app-control-state-display [control]="nameControl" label="name" />
+  </div>
+</section>
+
+<section class="demo-section">
+  <h2>mat-select</h2>
+  <div class="demo-row">
+    <mat-form-field>
+      <mat-label>Favorite color</mat-label>
+      <mat-select [formControl]="colorControl">
+        @for (color of colors; track color) {
+          <mat-option [value]="color">{{ color }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <app-control-state-display [control]="colorControl" label="color" />
+  </div>
+</section>
+
+<section class="demo-section">
+  <h2>mat-checkbox</h2>
+  <div class="demo-row">
+    <mat-checkbox [formControl]="newsletterControl">Subscribe to newsletter</mat-checkbox>
+    <app-control-state-display [control]="newsletterControl" label="newsletter" />
+  </div>
+</section>
+
+<section class="demo-section">
+  <h2>mat-slide-toggle</h2>
+  <div class="demo-row">
+    <mat-slide-toggle [formControl]="darkModeControl">Dark mode</mat-slide-toggle>
+    <app-control-state-display [control]="darkModeControl" label="darkMode" />
+  </div>
+</section>
+
+<section class="demo-section">
+  <h2>mat-slider</h2>
+  <div class="demo-row">
+    <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+      <input matSliderThumb [formControl]="volumeControl" />
+    </mat-slider>
+    <app-control-state-display [control]="volumeControl" label="volume" />
+  </div>
+</section>
+
+<section class="demo-section">
+  <h2>mat-datepicker</h2>
+  <div class="demo-row">
+    <mat-form-field>
+      <mat-label>Date of birth</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="dateControl" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker" />
+      <mat-datepicker #picker />
+    </mat-form-field>
+    <app-control-state-display [control]="dateControl" label="date" />
+  </div>
+</section>
+
+<section class="demo-section">
+  <h2>mat-radio-group</h2>
+  <div class="demo-row">
+    <mat-radio-group [formControl]="genderControl">
+      @for (option of genders; track option) {
+        <mat-radio-button [value]="option">{{ option }}</mat-radio-button>
+      }
+    </mat-radio-group>
+    <app-control-state-display [control]="genderControl" label="gender" />
+  </div>
+</section>

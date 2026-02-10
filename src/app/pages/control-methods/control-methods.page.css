@@ -1,0 +1,32 @@
+.demo-section {
+  margin-bottom: 32px;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+.demo-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.demo-row > :first-child {
+  flex: 1;
+}
+
+.demo-row > app-control-state-display {
+  flex: 1;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
