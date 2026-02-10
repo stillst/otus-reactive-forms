@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+mat-sidenav-container {
+  flex: 1;
+}
+
+mat-sidenav {
+  width: 240px;
+}
+
+.active-link {
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.page-content {
+  padding: 24px;
+  max-width: 960px;
+}
