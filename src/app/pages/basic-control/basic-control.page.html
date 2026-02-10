@@ -3,10 +3,10 @@
 <section class="demo-section">
   <h2>Text Input</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput [formControl]="nameControl" />
-    </mat-form-field>
+    <div class="control-wrap">
+      <label for="name">Name</label>
+      <input id="name" type="text" [formControl]="nameControl" />
+    </div>
     <app-control-state-display [control]="nameControl" label="name" />
   </div>
 </section>
@@ -14,10 +14,10 @@
 <section class="demo-section">
   <h2>Textarea</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Bio</mat-label>
-      <textarea matInput [formControl]="bioControl" rows="3"></textarea>
-    </mat-form-field>
+    <div class="control-wrap">
+      <label for="bio">Bio</label>
+      <textarea id="bio" [formControl]="bioControl" rows="3"></textarea>
+    </div>
     <app-control-state-display [control]="bioControl" label="bio" />
   </div>
 </section>
@@ -25,14 +25,15 @@
 <section class="demo-section">
   <h2>Select</h2>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>City</mat-label>
-      <mat-select [formControl]="cityControl">
+    <div class="control-wrap">
+      <label for="city">City</label>
+      <select id="city" [formControl]="cityControl">
+        <option value="" disabled>-- select --</option>
         @for (city of cities; track city) {
-          <mat-option [value]="city">{{ city }}</mat-option>
+          <option [value]="city">{{ city }}</option>
         }
-      </mat-select>
-    </mat-form-field>
+      </select>
+    </div>
     <app-control-state-display [control]="cityControl" label="city" />
   </div>
 </section>
@@ -40,7 +41,12 @@
 <section class="demo-section">
   <h2>Checkbox</h2>
   <div class="demo-row">
-    <mat-checkbox [formControl]="agreeControl">I agree to terms</mat-checkbox>
+    <div class="control-wrap">
+      <label>
+        <input type="checkbox" [formControl]="agreeControl" />
+        I agree to terms
+      </label>
+    </div>
     <app-control-state-display [control]="agreeControl" label="agree" />
   </div>
 </section>
@@ -49,10 +55,10 @@
   <h2>nonNullable FormControl</h2>
   <p>This control resets to its initial value (<code>"default"</code>) instead of <code>null</code>.</p>
   <div class="demo-row">
-    <mat-form-field>
-      <mat-label>Non-nullable field</mat-label>
-      <input matInput [formControl]="nonNullableControl" />
-    </mat-form-field>
+    <div class="control-wrap">
+      <label for="non-nullable">Non-nullable field</label>
+      <input id="non-nullable" type="text" [formControl]="nonNullableControl" />
+    </div>
     <app-control-state-display [control]="nonNullableControl" label="nonNullable" />
   </div>
   <p>Try clearing the field and calling <code>reset()</code> — value will be <code>"default"</code>.</p>
