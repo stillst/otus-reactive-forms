@@ -39,10 +39,8 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'form-submit',
+    path: 'form-group',
     loadComponent: () =>
-      import('./pages/form-submit/form-submit.page').then(
-        (m) => m.FormSubmitPage
-      ),
+      import('./pages/form-group/form-group.page').then((m) => m.FormGroupPage),
   },
 ];

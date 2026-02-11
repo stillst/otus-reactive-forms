@@ -1,0 +1,145 @@
+<h1>Form Group</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <!-- Section 1: Basic FormGroup -->
+  <section class="demo-section">
+    <h2>Basic FormGroup</h2>
+    <div class="demo-row">
+      <div class="control-wrap">
+        <label for="name-field">Name</label>
+        <input id="name-field" type="text" formControlName="name" />
+        @if (form.controls.name.hasError('required') && form.controls.name.touched) {
+          <span class="error">Name is required</span>
+        }
+      </div>
+      <app-control-state-display [control]="form.controls.name" label="name" />
+    </div>
+    <div class="demo-row">
+      <div class="control-wrap">
+        <label for="email-field">Email</label>
+        <input id="email-field" type="text" formControlName="email" />
+        @if (form.controls.email.hasError('required') && form.controls.email.touched) {
+          <span class="error">Email is required</span>
+        }
+        @if (form.controls.email.hasError('email') && form.controls.email.touched) {
+          <span class="error">Please enter a valid email</span>
+        }
+      </div>
+      <app-control-state-display [control]="form.controls.email" label="email" />
+    </div>
+    <div class="demo-row">
+      <app-control-state-display [control]="form" label="form (group)" />
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 2: Nested FormGroups -->
+  <section class="demo-section">
+    <h2>Nested FormGroups</h2>
+    <div formGroupName="address">
+      <div class="demo-row">
+        <div class="control-wrap">
+          <label for="street-field">Street</label>
+          <input id="street-field" type="text" formControlName="street" />
+          @if (form.controls.address.controls.street.hasError('required') && form.controls.address.controls.street.touched) {
+            <span class="error">Street is required</span>
+          }
+        </div>
+        <app-control-state-display [control]="form.controls.address.controls.street" label="street" />
+      </div>
+      <div class="demo-row">
+        <div class="control-wrap">
+          <label for="city-field">City</label>
+          <input id="city-field" type="text" formControlName="city" />
+          @if (form.controls.address.controls.city.hasError('required') && form.controls.address.controls.city.touched) {
+            <span class="error">City is required</span>
+          }
+        </div>
+        <app-control-state-display [control]="form.controls.address.controls.city" label="city" />
+      </div>
+    </div>
+    <div class="demo-row state-row">
+      <app-control-state-display [control]="form.controls.address" label="address (nested group)" />
+      <app-control-state-display [control]="form" label="form (root group)" />
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 3: Cross-field Validator -->
+  <section class="demo-section">
+    <h2>Cross-field Validator (group-level)</h2>
+    <div formGroupName="passwords">
+      <div class="demo-row">
+        <div class="control-wrap">
+          <label for="password-field">Password</label>
+          <input id="password-field" type="password" formControlName="password" />
+        </div>
+        <div class="control-wrap">
+          <label for="confirm-field">Confirm Password</label>
+          <input id="confirm-field" type="password" formControlName="confirmPassword" />
+        </div>
+      </div>
+      @if (form.controls.passwords.hasError('passwordMismatch') && form.controls.passwords.dirty) {
+        <span class="error group-error">Passwords do not match (group-level error)</span>
+      }
+    </div>
+    <div class="demo-row">
+      <app-control-state-display [control]="form.controls.passwords" label="passwords (group)" />
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 4: setValue vs patchValue -->
+  <section class="demo-section">
+    <h2>setValue vs patchValue</h2>
+    <div class="button-group">
+      <button type="button" class="btn btn-primary" (click)="setAll()">
+        setValue({{ '{' }}...all fields...{{ '}' }})
+      </button>
+      <button type="button" class="btn btn-primary" (click)="patchPartial()">
+        patchValue({{ '{' }}name: 'Jane Doe'{{ '}' }})
+      </button>
+      <button type="button" class="btn" (click)="resetForm()">
+        reset()
+      </button>
+    </div>
+    <div class="value-output">
+      <h3>form.value</h3>
+      <pre>{{ form.value | json }}</pre>
+    </div>
+    <div class="demo-row">
+      <app-control-state-display [control]="form" label="form (group)" />
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 5: Form Submit -->
+  <section class="demo-section">
+    <h2>Form Submit</h2>
+    <div class="submit-section">
+      <button type="submit" [disabled]="form.invalid || submitting()">
+        @if (submitting()) {
+          Submitting...
+        } @else {
+          Submit
+        }
+      </button>
+    </div>
+  </section>
+</form>
+
+@if (submitting()) {
+  <div class="loading">Sending data...</div>
+}
+
+@if (submittedData(); as data) {
+  <section class="result-section">
+    <h2>Submitted Data</h2>
+    <pre>{{ data | json }}</pre>
+  </section>
+}

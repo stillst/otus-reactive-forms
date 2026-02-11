@@ -27,11 +27,11 @@ export class App {
 
   protected readonly navLinks = signal([
     { path: '/basic', label: 'Basic Control', icon: 'tune' },
-    { path: '/validators', label: 'Validators', icon: 'verified' },
-    { path: '/observing', label: 'Observing Changes', icon: 'visibility' },
-    { path: '/methods', label: 'Control Methods', icon: 'build' },
     { path: '/material', label: 'Material Controls', icon: 'widgets' },
+    { path: '/methods', label: 'Control Methods', icon: 'build' },
+    { path: '/observing', label: 'Observing Changes', icon: 'visibility' },
+    { path: '/form-group', label: 'Form Group', icon: 'ballot' },
+    { path: '/validators', label: 'Validators', icon: 'verified' },
     { path: '/async-validators', label: 'Async Validators', icon: 'hourglass_top' },
-    { path: '/form-submit', label: 'Form Submit', icon: 'send' },
   ]);
 }
