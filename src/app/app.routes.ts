@@ -38,4 +38,11 @@ export const routes: Routes = [
         (m) => m.AsyncValidatorsPage
       ),
   },
+  {
+    path: 'form-submit',
+    loadComponent: () =>
+      import('./pages/form-submit/form-submit.page').then(
+        (m) => m.FormSubmitPage
+      ),
+  },
 ];

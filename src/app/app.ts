@@ -32,5 +32,6 @@ export class App {
     { path: '/methods', label: 'Control Methods', icon: 'build' },
     { path: '/material', label: 'Material Controls', icon: 'widgets' },
     { path: '/async-validators', label: 'Async Validators', icon: 'hourglass_top' },
+    { path: '/form-submit', label: 'Form Submit', icon: 'send' },
   ]);
 }
