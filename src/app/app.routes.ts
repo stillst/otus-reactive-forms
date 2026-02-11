@@ -43,4 +43,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/form-group/form-group.page').then((m) => m.FormGroupPage),
   },
+  {
+    path: 'form-array',
+    loadComponent: () =>
+      import('./pages/form-array/form-array.page').then((m) => m.FormArrayPage),
+  },
 ];
