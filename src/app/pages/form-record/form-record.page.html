@@ -90,6 +90,7 @@
     }
     <div class="add-row">
       <input type="text" [formControl]="newFieldKey" placeholder="Field name" />
+      <input type="text" [formControl]="newFieldValue" placeholder="Initial value" />
       <button type="button" class="btn btn-primary" (click)="addDynamicField()"
         [disabled]="!newFieldKey.value.trim() || dynamicForm.contains(newFieldKey.value.trim())">
         Add Field

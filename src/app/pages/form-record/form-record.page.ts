@@ -36,6 +36,7 @@ export class FormRecordPage {
   // Section 3: Dynamic form with required fields
   readonly dynamicForm = new FormRecord<FormControl<string>>({});
   readonly newFieldKey = new FormControl('', { nonNullable: true });
+  readonly newFieldValue = new FormControl('', { nonNullable: true });
 
   readonly submitting = signal(false);
   readonly submittedData = signal<Record<string, unknown> | null>(null);
@@ -85,11 +86,14 @@ export class FormRecordPage {
     const key = this.newFieldKey.value.trim();
     if (!key || this.dynamicForm.contains(key)) return;
 
-    this.dynamicForm.addControl(
-      key,
-      new FormControl('', { nonNullable: true, validators: Validators.required })
-    );
+    const ctrl = new FormControl('', { nonNullable: true, validators: Validators.required });
+    const initialValue = this.newFieldValue.value.trim();
+    if (initialValue) {
+      ctrl.setValue(initialValue);
+    }
+    this.dynamicForm.addControl(key, ctrl);
     this.newFieldKey.reset();
+    this.newFieldValue.reset();
   }
 
   removeDynamicField(key: string): void {
