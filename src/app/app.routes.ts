@@ -53,4 +53,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/form-record/form-record.page').then((m) => m.FormRecordPage),
   },
+  {
+    path: 'signal-forms',
+    loadComponent: () =>
+      import('./pages/signal-forms/signal-forms.page').then((m) => m.SignalFormsPage),
+  },
 ];

@@ -1,0 +1,234 @@
+<h1>Signal Forms</h1>
+<p class="page-description">
+  Experimental API (Angular 21). Uses <code>form()</code>, <code>[formField]</code> directive,
+  and schema-based validation from <code>&#64;angular/forms/signals</code>.
+</p>
+
+<!-- Section 1: Basic Signal Form -->
+<section class="demo-section">
+  <h2>Basic Signal Form</h2>
+  <p class="description">
+    <code>form(signal, schemaFn)</code> creates a typed field tree.
+    Bind fields with <code>[formField]</code>. Access state via <code>field().value()</code>,
+    <code>field().errors()</code>, etc.
+  </p>
+
+  <div class="form-row">
+    <div class="control-wrap">
+      <label for="profile-name">Name</label>
+      <input id="profile-name" type="text" [formField]="profileForm.name" />
+      @if (profileForm.name().touched() && profileForm.name().invalid()) {
+        @for (error of profileForm.name().errors(); track error.kind) {
+          <span class="error">{{ error.message }}</span>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="control-wrap">
+      <label for="profile-email">Email</label>
+      <input id="profile-email" type="email" [formField]="profileForm.email" />
+      @if (profileForm.email().touched() && profileForm.email().invalid()) {
+        @for (error of profileForm.email().errors(); track error.kind) {
+          <span class="error">{{ error.message }}</span>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="control-wrap">
+      <label for="profile-bio">Bio (min 10 chars)</label>
+      <textarea id="profile-bio" [formField]="profileForm.bio" rows="3"></textarea>
+      @if (profileForm.bio().touched() && profileForm.bio().invalid()) {
+        @for (error of profileForm.bio().errors(); track error.kind) {
+          <span class="error">{{ error.message }}</span>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="value-output">
+    <h3>profileModel()</h3>
+    <pre>{{ profileModel() | json }}</pre>
+  </div>
+</section>
+
+<hr />
+
+<!-- Section 2: Custom Cross-field Validation -->
+<section class="demo-section">
+  <h2>Custom Validation (Cross-field)</h2>
+  <p class="description">
+    Use <code>validate(path, fn)</code> with <code>valueOf(otherPath)</code>
+    to compare fields reactively.
+  </p>
+
+  <div class="form-row">
+    <div class="control-wrap">
+      <label for="pw">Password (min 6 chars)</label>
+      <input id="pw" type="password" [formField]="passwordForm.password" />
+      @if (passwordForm.password().touched() && passwordForm.password().invalid()) {
+        @for (error of passwordForm.password().errors(); track error.kind) {
+          <span class="error">{{ error.message }}</span>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="control-wrap">
+      <label for="pw-confirm">Confirm Password</label>
+      <input id="pw-confirm" type="password" [formField]="passwordForm.confirmPassword" />
+      @if (passwordForm.confirmPassword().touched() && passwordForm.confirmPassword().invalid()) {
+        @for (error of passwordForm.confirmPassword().errors(); track error.kind) {
+          <span class="error">{{ error.message }}</span>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="value-output">
+    <h3>State</h3>
+    <pre>valid: {{ passwordForm().valid() }}
+dirty: {{ passwordForm().dirty() }}</pre>
+  </div>
+</section>
+
+<hr />
+
+<!-- Section 3: Conditional Logic -->
+<section class="demo-section">
+  <h2>Conditional Logic (disabled / hidden)</h2>
+  <p class="description">
+    <code>disabled(path, fn)</code> disables a field reactively.
+    <code>hidden(path, fn)</code> hides it — hidden fields skip validation.
+  </p>
+
+  <div class="form-row">
+    <label class="checkbox-label">
+      <input type="checkbox" [formField]="settingsForm.receiveNewsletter" />
+      Receive newsletter
+    </label>
+  </div>
+
+  <div class="form-row">
+    <div class="control-wrap">
+      <label for="newsletter-email">Newsletter Email</label>
+      <input id="newsletter-email" type="email" [formField]="settingsForm.newsletterEmail" />
+      @if (settingsForm.newsletterEmail().touched() && settingsForm.newsletterEmail().invalid()) {
+        @for (error of settingsForm.newsletterEmail().errors(); track error.kind) {
+          <span class="error">{{ error.message }}</span>
+        }
+      }
+      @if (settingsForm.newsletterEmail().disabled()) {
+        <span class="hint">Enable "Receive newsletter" to edit</span>
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="checkbox-label">
+      <input type="checkbox" [formField]="settingsForm.showBio" />
+      Show bio field
+    </label>
+  </div>
+
+  @if (!settingsForm.bio().hidden()) {
+    <div class="form-row">
+      <div class="control-wrap">
+        <label for="settings-bio">Bio (min 5 chars)</label>
+        <textarea id="settings-bio" [formField]="settingsForm.bio" rows="2"></textarea>
+        @if (settingsForm.bio().touched() && settingsForm.bio().invalid()) {
+          @for (error of settingsForm.bio().errors(); track error.kind) {
+            <span class="error">{{ error.message }}</span>
+          }
+        }
+      </div>
+    </div>
+  }
+
+  <div class="value-output">
+    <h3>settingsModel()</h3>
+    <pre>{{ settingsModel() | json }}</pre>
+    <pre>form valid: {{ settingsForm().valid() }}</pre>
+  </div>
+</section>
+
+<hr />
+
+<!-- Section 4: Array Fields -->
+<section class="demo-section">
+  <h2>Array Fields</h2>
+  <p class="description">
+    Update the model signal directly to add/remove items.
+    The field tree automatically reflects changes.
+  </p>
+
+  @for (item of todosForm.items; track $index) {
+    <div class="array-item">
+      <label class="checkbox-label">
+        <input type="checkbox" [formField]="item.done" />
+      </label>
+      <input type="text" [formField]="item.text" />
+      <button type="button" class="btn btn-danger" (click)="removeTodo($index)">Remove</button>
+    </div>
+  }
+
+  <div class="add-row">
+    <input
+      type="text"
+      [value]="newTodoText()"
+      (input)="newTodoText.set($any($event.target).value)"
+      placeholder="New todo..."
+      (keydown.enter)="addTodo()"
+    />
+    <button type="button" class="btn btn-primary" (click)="addTodo()" [disabled]="!newTodoText().trim()">
+      Add Todo
+    </button>
+  </div>
+
+  <div class="value-output">
+    <h3>todosModel()</h3>
+    <pre>{{ todosModel() | json }}</pre>
+  </div>
+</section>
+
+<hr />
+
+<!-- Section 5: Form Submission -->
+<section class="demo-section">
+  <h2>Form Submission</h2>
+  <p class="description">
+    <code>submit(form, asyncFn)</code> marks all fields as touched,
+    aborts if invalid, and sets <code>submitting</code> during execution.
+  </p>
+
+  <div class="button-group">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onSubmitProfile()"
+      [disabled]="profileSubmitting()"
+    >
+      @if (profileSubmitting()) {
+        Submitting...
+      } @else {
+        Submit Profile
+      }
+    </button>
+    <button type="button" class="btn" (click)="resetProfile()">Reset</button>
+  </div>
+
+  @if (profileSubmitting()) {
+    <div class="loading">Sending data...</div>
+  }
+
+  @if (submittedProfile(); as data) {
+    <div class="result-section">
+      <h3>Submitted</h3>
+      <pre>{{ data | json }}</pre>
+    </div>
+  }
+</section>

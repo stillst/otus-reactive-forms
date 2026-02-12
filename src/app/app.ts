@@ -33,6 +33,7 @@ export class App {
     { path: '/form-group', label: 'Form Group', icon: 'ballot' },
     { path: '/form-array', label: 'Form Array', icon: 'list' },
     { path: '/form-record', label: 'Form Record', icon: 'dynamic_form' },
+    { path: '/signal-forms', label: 'Signal Forms', icon: 'bolt' },
     { path: '/validators', label: 'Validators', icon: 'verified' },
     { path: '/async-validators', label: 'Async Validators', icon: 'hourglass_top' },
   ]);
