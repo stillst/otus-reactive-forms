@@ -8,6 +8,7 @@
       <input id="required-field" type="text" [formControl]="requiredControl" />
       @if (requiredControl.hasError('required')) {
         <span class="error">This field is required</span>
+        <span>{{ requiredControl.errors?.["required"] }}</span>
       }
     </div>
     <app-control-state-display [control]="requiredControl" label="required" />
