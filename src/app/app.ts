@@ -32,6 +32,7 @@ export class App {
     { path: '/observing', label: 'Observing Changes', icon: 'visibility' },
     { path: '/form-group', label: 'Form Group', icon: 'ballot' },
     { path: '/form-array', label: 'Form Array', icon: 'list' },
+    { path: '/form-record', label: 'Form Record', icon: 'dynamic_form' },
     { path: '/validators', label: 'Validators', icon: 'verified' },
     { path: '/async-validators', label: 'Async Validators', icon: 'hourglass_top' },
   ]);

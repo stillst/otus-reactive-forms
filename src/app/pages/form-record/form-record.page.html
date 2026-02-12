@@ -1,0 +1,161 @@
+<h1>Form Record</h1>
+
+<!-- Section 1: Basic FormRecord -->
+<section class="demo-section">
+  <h2>Basic FormRecord (Dynamic Settings)</h2>
+  <p class="description">
+    <code>FormRecord</code> is like <code>FormGroup</code>, but allows adding and removing controls dynamically.
+    All controls share the same type.
+  </p>
+  <div [formGroup]="settings">
+    @for (key of settingKeys; track key) {
+      <div class="record-item">
+        <span class="record-key">{{ key }}</span>
+        <input type="text" [formControlName]="key" />
+        <button type="button" class="btn btn-danger" (click)="removeSetting(key)">Remove</button>
+      </div>
+    }
+  </div>
+  <div class="add-row">
+    <input type="text" [formControl]="newSettingKey" placeholder="Key" />
+    <input type="text" [formControl]="newSettingValue" placeholder="Value" />
+    <button type="button" class="btn btn-primary" (click)="addSetting()"
+      [disabled]="!newSettingKey.value.trim() || settings.contains(newSettingKey.value.trim())">
+      Add Setting
+    </button>
+  </div>
+  @if (newSettingKey.value.trim() && settings.contains(newSettingKey.value.trim())) {
+    <span class="error">Key "{{ newSettingKey.value.trim() }}" already exists</span>
+  }
+  <div class="demo-row state-row">
+    <app-control-state-display [control]="settings" label="settings (record)" />
+  </div>
+</section>
+
+<hr />
+
+<!-- Section 2: FormRecord with Checkboxes -->
+<section class="demo-section">
+  <h2>FormRecord with Checkboxes (Permissions)</h2>
+  <p class="description">
+    A <code>FormRecord&lt;FormControl&lt;boolean&gt;&gt;</code> to manage a dynamic set of permission flags.
+  </p>
+  <div [formGroup]="permissions">
+    @for (key of permissionKeys; track key) {
+      <div class="record-item checkbox-item">
+        <label class="checkbox-label">
+          <input type="checkbox" [formControlName]="key" />
+          {{ key }}
+        </label>
+        <button type="button" class="btn btn-danger" (click)="removePermission(key)">Remove</button>
+      </div>
+    }
+  </div>
+  <div class="add-row">
+    <input type="text" [formControl]="newPermissionKey" placeholder="Permission name" />
+    <button type="button" class="btn btn-primary" (click)="addPermission()"
+      [disabled]="!newPermissionKey.value.trim() || permissions.contains(newPermissionKey.value.trim())">
+      Add Permission
+    </button>
+  </div>
+  <div class="value-output">
+    <h3>permissions.value</h3>
+    <pre>{{ permissions.value | json }}</pre>
+  </div>
+  <div class="demo-row state-row">
+    <app-control-state-display [control]="permissions" label="permissions (record)" />
+  </div>
+</section>
+
+<hr />
+
+<!-- Section 3: Dynamic Form with Validation -->
+<section class="demo-section">
+  <h2>Dynamic Form with Validation</h2>
+  <p class="description">
+    Build a form on-the-fly by adding named fields. Each field has <code>Validators.required</code>.
+  </p>
+  <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+    @for (key of dynamicFieldKeys; track key) {
+      <div class="record-item">
+        <span class="record-key">{{ key }}</span>
+        <div class="control-wrap field-input">
+          <input type="text" [formControlName]="key" [placeholder]="key" />
+          @if (dynamicForm.controls[key].hasError('required') && dynamicForm.controls[key].touched) {
+            <span class="error">{{ key }} is required</span>
+          }
+        </div>
+        <button type="button" class="btn btn-danger" (click)="removeDynamicField(key)">Remove</button>
+      </div>
+    }
+    <div class="add-row">
+      <input type="text" [formControl]="newFieldKey" placeholder="Field name" />
+      <button type="button" class="btn btn-primary" (click)="addDynamicField()"
+        [disabled]="!newFieldKey.value.trim() || dynamicForm.contains(newFieldKey.value.trim())">
+        Add Field
+      </button>
+    </div>
+
+    @if (dynamicFieldKeys.length > 0) {
+      <div class="submit-section">
+        <button type="submit" [disabled]="dynamicForm.invalid || submitting()">
+          @if (submitting()) {
+            Submitting...
+          } @else {
+            Submit
+          }
+        </button>
+      </div>
+    }
+  </form>
+  <div class="demo-row state-row">
+    <app-control-state-display [control]="dynamicForm" label="dynamicForm (record)" />
+  </div>
+</section>
+
+@if (submitting()) {
+  <div class="loading">Sending data...</div>
+}
+
+@if (submittedData(); as data) {
+  <section class="result-section">
+    <h2>Submitted Data</h2>
+    <pre>{{ data | json }}</pre>
+  </section>
+}
+
+<hr />
+
+<!-- Section 4: FormRecord Methods -->
+<section class="demo-section">
+  <h2>FormRecord Methods</h2>
+  <div class="button-group">
+    <button type="button" class="btn btn-primary" (click)="addSetting()">
+      addControl(key, ctrl)
+    </button>
+    <button type="button" class="btn btn-primary" (click)="setControlDemo()">
+      setControl('theme', new)
+    </button>
+    <button type="button" class="btn btn-primary" (click)="checkContains('theme')">
+      contains('theme')
+    </button>
+    <button type="button" class="btn btn-primary" (click)="checkContains('missing')">
+      contains('missing')
+    </button>
+    <button type="button" class="btn" (click)="resetSettings()">
+      reset()
+    </button>
+  </div>
+  @if (containsDemo(); as result) {
+    <div class="value-output">
+      <pre>{{ result }}</pre>
+    </div>
+  }
+  <div class="value-output">
+    <h3>settings.value</h3>
+    <pre>{{ settings.value | json }}</pre>
+  </div>
+  <div class="demo-row">
+    <app-control-state-display [control]="settings" label="settings (record)" />
+  </div>
+</section>
