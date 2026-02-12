@@ -80,7 +80,7 @@
       <div class="record-item">
         <span class="record-key">{{ key }}</span>
         <div class="control-wrap field-input">
-          <input type="text" [formControlName]="key" [placeholder]="key" />
+          <input type="text" [formControl]="dynamicForm.controls[key]" [placeholder]="key" />
           @if (dynamicForm.controls[key].hasError('required') && dynamicForm.controls[key].touched) {
             <span class="error">{{ key }} is required</span>
           }
