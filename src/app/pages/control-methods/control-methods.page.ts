@@ -21,4 +21,12 @@ export class ControlMethodsPage {
     this.control.clearValidators();
     this.control.updateValueAndValidity();
   }
+
+  setCustomError(): void {
+    this.control.setErrors({ customError: 'Something went wrong' });
+  }
+
+  clearErrors(): void {
+    this.control.setErrors(null);
+  }
 }

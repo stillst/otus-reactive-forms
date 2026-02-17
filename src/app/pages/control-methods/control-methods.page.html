@@ -8,6 +8,9 @@
       @if (control.hasError('required')) {
         <span class="error">Required</span>
       }
+      @if (control.hasError('customError')) {
+        <span class="error">{{ control.getError('customError') }}</span>
+      }
     </div>
     <app-control-state-display [control]="control" label="control" />
   </div>
@@ -62,6 +65,20 @@
     </button>
     <button class="btn" (click)="removeValidators()">
       clearValidators()
+    </button>
+  </div>
+</section>
+
+<hr />
+
+<section class="demo-section">
+  <h2>setErrors</h2>
+  <div class="button-group">
+    <button class="btn" (click)="setCustomError()">
+      setErrors({{ '{' }} customError: '...' {{ '}' }})
+    </button>
+    <button class="btn" (click)="clearErrors()">
+      setErrors(null)
     </button>
   </div>
 </section>
