@@ -1,0 +1,34 @@
+:host {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.star {
+  font-size: 32px;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.15s, transform 0.15s;
+  user-select: none;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.star:hover:not(:disabled) {
+  transform: scale(1.2);
+}
+
+.star.filled {
+  color: #f5a623;
+}
+
+.star:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+:host.disabled {
+  opacity: 0.6;
+}

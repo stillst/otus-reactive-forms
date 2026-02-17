@@ -58,4 +58,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/signal-forms/signal-forms.page').then((m) => m.SignalFormsPage),
   },
+  {
+    path: 'cva',
+    loadComponent: () =>
+      import('./pages/cva/cva.page').then((m) => m.CvaPage),
+  },
 ];

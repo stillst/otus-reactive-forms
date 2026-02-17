@@ -36,5 +36,6 @@ export class App {
     { path: '/validators', label: 'Validators', icon: 'verified' },
     { path: '/async-validators', label: 'Async Validators', icon: 'hourglass_top' },
     { path: '/signal-forms', label: 'Signal Forms', icon: 'bolt' },
+    { path: '/cva', label: 'CVA (Custom Control)', icon: 'star' },
   ]);
 }

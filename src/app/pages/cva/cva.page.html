@@ -1,0 +1,62 @@
+<h1>ControlValueAccessor (CVA)</h1>
+
+<section class="demo-section">
+  <h2>1. Basic Usage</h2>
+  <p class="description">
+    Custom star rating component connected to a <code>FormControl</code> via ControlValueAccessor.
+    Click the stars to set a value.
+  </p>
+  <div class="demo-row">
+    <div class="control-wrap">
+      <label>Rating</label>
+      <app-star-rating [formControl]="rating" />
+      <div class="value-output">
+        <pre>Value: {{ rating.value | json }}</pre>
+      </div>
+    </div>
+    <app-control-state-display [control]="rating" label="rating" />
+  </div>
+</section>
+
+<hr />
+
+<section class="demo-section">
+  <h2>2. With Validation</h2>
+  <p class="description">
+    Rating with <code>Validators.required</code> and <code>Validators.min(1)</code> — at least 1 star must be selected.
+  </p>
+  <div class="demo-row">
+    <div class="control-wrap">
+      <label>Rating (required)</label>
+      <app-star-rating [formControl]="ratingWithValidation" />
+      @if (ratingWithValidation.hasError('min') || ratingWithValidation.hasError('required')) {
+        <span class="error">Please select at least 1 star</span>
+      }
+      <div class="button-group">
+        <button class="btn" (click)="resetValidation()">Reset</button>
+      </div>
+    </div>
+    <app-control-state-display [control]="ratingWithValidation" label="ratingWithValidation" />
+  </div>
+</section>
+
+<hr />
+
+<section class="demo-section">
+  <h2>3. Disabled State</h2>
+  <p class="description">
+    Demonstrates <code>setDisabledState</code> — the CVA receives disabled status from the form control.
+  </p>
+  <div class="demo-row">
+    <div class="control-wrap">
+      <label>Rating (toggle disabled)</label>
+      <app-star-rating [formControl]="disabledRating" />
+      <div class="button-group">
+        <button class="btn" (click)="toggleDisabled()">
+          {{ disabledRating.disabled ? 'Enable' : 'Disable' }}
+        </button>
+      </div>
+    </div>
+    <app-control-state-display [control]="disabledRating" label="disabledRating" />
+  </div>
+</section>
