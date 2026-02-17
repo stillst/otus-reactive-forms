@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ControlStateDisplay } from '../../shared/control-state-display';
+import {required} from '@angular/forms/signals';
 
 interface PasswordControls {
   password: FormControl<string | null>;
@@ -42,9 +43,15 @@ export class FormGroupPage {
         password: new FormControl(''),
         confirmPassword: new FormControl(''),
       },
-      { validators: passwordMatchValidator }
+      { validators: [passwordMatchValidator] }
     ),
   });
+
+  ngOnInit() {
+    this.form.valueChanges.subscribe(value => {
+      console.log({value})
+    })
+  }
 
   readonly submitting = signal(false);
   readonly submittedData = signal<Record<string, unknown> | null>(null);
@@ -60,7 +67,7 @@ export class FormGroupPage {
 
   patchPartial(): void {
     this.form.patchValue({
-      name: 'Jane Doe',
+      name: 'Брюс Вейн',
     });
   }
 
