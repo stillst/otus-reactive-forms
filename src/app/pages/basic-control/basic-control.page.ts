@@ -11,10 +11,10 @@ import { ControlStateDisplay } from '../../shared/control-state-display';
 })
 export class BasicControlPage {
   readonly nameControl = new FormControl('');
-  readonly bioControl = new FormControl('');
+  readonly bioControl = new FormControl('', { updateOn: "blur" });
   readonly cityControl = new FormControl('');
+  readonly cities = ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Kazan'];
+
   readonly agreeControl = new FormControl(false);
   readonly nonNullableControl = new FormControl('default', { nonNullable: true });
-
-  readonly cities = ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Kazan'];
 }

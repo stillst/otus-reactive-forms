@@ -18,7 +18,7 @@
     <div class="demo-row">
       <div class="control-wrap">
         <label for="email-field">Email</label>
-        <input id="email-field" type="text" formControlName="email" />
+        <input id="email-field" type="text" [formControl]="form.controls.email" />
         @if (form.controls.email.hasError('required') && form.controls.email.touched) {
           <span class="error">Email is required</span>
         }

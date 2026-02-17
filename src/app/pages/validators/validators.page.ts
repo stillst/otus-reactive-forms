@@ -14,7 +14,7 @@ function forbiddenWordValidator(forbidden: string) {
 
 @Component({
   selector: 'app-validators-page',
-  imports: [ReactiveFormsModule, ControlStateDisplay, JsonPipe],
+  imports: [ReactiveFormsModule, ControlStateDisplay],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './validators.page.html',
   styleUrl: './validators.page.css',

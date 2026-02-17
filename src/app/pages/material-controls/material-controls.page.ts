@@ -40,5 +40,5 @@ export class MaterialControlsPage {
   readonly genderControl = new FormControl('');
 
   readonly colors = ['Red', 'Green', 'Blue', 'Yellow', 'Purple'];
-  readonly genders = ['Male', 'Female', 'Other'];
+  readonly genders = ['Male', 'Female'];
 }

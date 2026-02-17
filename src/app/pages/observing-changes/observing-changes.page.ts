@@ -25,8 +25,14 @@ export class ObservingChangesPage implements OnInit {
   readonly log = signal<LogEntry[]>([]);
 
   ngOnInit(): void {
-    this.emailControl.valueChanges.subscribe((value) => {
-      this.addLog('value', JSON.stringify(value));
+    this.emailControl.valueChanges.subscribe({
+      next: (value) => {
+        this.addLog('value', JSON.stringify(value));
+      },
+      error: () => {},
+      complete: () => {
+        console.log("complete")
+      },
     });
 
     this.emailControl.statusChanges.subscribe((status) => {
@@ -34,8 +40,9 @@ export class ObservingChangesPage implements OnInit {
     });
 
     this.searchControl.valueChanges
-      .pipe(debounceTime(300), distinctUntilChanged())
+      .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((value) => {
+        console.log("search", value)
         this.debouncedValue.set(value ?? '');
       });
   }
