@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, effect, signal} from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import {
   form,
@@ -51,8 +51,6 @@ export class SignalFormsPage {
     bio: '',
   });
 
-
-
   readonly profileForm = form(this.profileModel, (profile) => {
     required(profile.name, { message: 'Name is required' });
     required(profile.email, { message: 'Email is required' });
@@ -77,6 +75,12 @@ export class SignalFormsPage {
       return undefined;
     });
   });
+
+  passwordFormEffect = effect(() => {
+    console.log("password", this.passwordForm.password().value())
+    //const form = this.passwordForm()
+    // console.log("form", form.value())
+  })
 
   // Section 3: Conditional Logic (disabled / hidden)
   readonly settingsModel = signal<SettingsData>({

@@ -43,6 +43,10 @@ export class FormArrayPage {
   readonly submitting = signal(false);
   readonly submittedData = signal<Record<string, unknown> | null>(null);
 
+  constructor() {
+    this.form.valueChanges.subscribe(x => console.log("form value", x))
+  }
+
   get phones(): FormArray<FormControl<string>> {
     return this.form.controls.phones;
   }

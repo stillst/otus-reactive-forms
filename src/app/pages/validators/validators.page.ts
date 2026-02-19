@@ -20,8 +20,8 @@ function forbiddenWordValidator(forbidden: string) {
   styleUrl: './validators.page.css',
 })
 export class ValidatorsPage {
-  readonly requiredControl = new FormControl('', { nonNullable: true, validators: Validators.required });
-  readonly emailControl = new FormControl('', Validators.email);
+  readonly requiredControl = new FormControl('', { nonNullable: true, validators: [Validators.required] });
+  readonly emailControl = new FormControl('', [Validators.required, Validators.email]);
   readonly minLengthControl = new FormControl('', Validators.minLength(3));
   readonly patternControl = new FormControl('', Validators.pattern(/^\d+$/));
   readonly customControl = new FormControl('', forbiddenWordValidator('admin'));

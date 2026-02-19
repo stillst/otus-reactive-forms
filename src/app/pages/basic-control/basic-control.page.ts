@@ -15,6 +15,6 @@ export class BasicControlPage {
   readonly cityControl = new FormControl('');
   readonly cities = ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Kazan'];
 
-  readonly agreeControl = new FormControl(false);
-  readonly nonNullableControl = new FormControl('default', { nonNullable: true });
+  readonly agreeControl = new FormControl(false,  { nonNullable: true  });
+  readonly nonNullableControl = new FormControl("", { nonNullable: true  });
 }

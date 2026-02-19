@@ -5,7 +5,7 @@
     <div class="control-wrap">
       <label for="demo-field">Demo field</label>
       <input id="demo-field" type="text" [formControl]="control" />
-      @if (control.hasError('required')) {
+      @if (control.hasError('required') && control.touched) {
         <span class="error">Required</span>
       }
       @if (control.hasError('customError')) {

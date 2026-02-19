@@ -22,6 +22,10 @@ export class FormRecordPage {
     language: new FormControl('en', { nonNullable: true }),
   });
 
+  constructor() {
+    this.settings.valueChanges.subscribe(x => console.log("settings", x))
+  }
+
   readonly newSettingKey = new FormControl('', { nonNullable: true });
   readonly newSettingValue = new FormControl('', { nonNullable: true });
 
@@ -73,7 +77,7 @@ export class FormRecordPage {
     const key = this.newPermissionKey.value.trim();
     if (!key || this.permissions.contains(key)) return;
 
-    this.permissions.addControl(key, new FormControl(false, { nonNullable: true }));
+    this.permissions.addControl(key, new FormControl(true, { nonNullable: true }));
     this.newPermissionKey.reset();
   }
 
