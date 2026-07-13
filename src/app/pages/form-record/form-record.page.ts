@@ -105,6 +105,15 @@ export class FormRecordPage {
   }
 
   // Section 4 methods
+  addControlDemo(): void {
+    let i = 1;
+    while (this.settings.contains(`custom${i}`)) i++;
+    this.settings.addControl(
+      `custom${i}`,
+      new FormControl(`value ${i}`, { nonNullable: true })
+    );
+  }
+
   setControlDemo(): void {
     this.settings.setControl(
       'theme',
