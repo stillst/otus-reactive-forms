@@ -1,6 +1,6 @@
 <h1>Signal Forms</h1>
 <p class="page-description">
-  Experimental API (Angular 21). Uses <code>form()</code>, <code>[formField]</code> directive,
+  Stable API since Angular 22. Uses <code>form()</code>, <code>[formField]</code> directive,
   and schema-based validation from <code>&#64;angular/forms/signals</code>.
 </p>
 
@@ -62,7 +62,8 @@
   <h2>Custom Validation (Cross-field)</h2>
   <p class="description">
     Use <code>validate(path, fn)</code> with <code>valueOf(otherPath)</code>
-    to compare fields reactively.
+    to compare fields reactively. A custom error is a plain
+    <code>&#123; kind, message &#125;</code> object.
   </p>
 
   <div class="form-row">
@@ -102,8 +103,10 @@ dirty: {{ passwordForm().dirty() }}</pre>
 <section class="demo-section">
   <h2>Conditional Logic (disabled / hidden)</h2>
   <p class="description">
-    <code>disabled(path, fn)</code> disables a field reactively.
-    <code>hidden(path, fn)</code> hides it — hidden fields skip validation.
+    <code>disabled(path, &#123; when &#125;)</code> disables a field reactively.
+    <code>hidden(path, &#123; when &#125;)</code> hides it — hidden fields skip validation.
+    Since v22 the condition goes into the <code>&#123; when: ... &#125;</code> config;
+    passing a function directly is deprecated.
   </p>
 
   <div class="form-row">
@@ -203,6 +206,7 @@ dirty: {{ passwordForm().dirty() }}</pre>
   <p class="description">
     <code>submit(form, asyncFn)</code> marks all fields as touched,
     aborts if invalid, and sets <code>submitting</code> during execution.
+    Since v22 it resolves to a <code>boolean</code> indicating success.
   </p>
 
   <div class="button-group">

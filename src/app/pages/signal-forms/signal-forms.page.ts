@@ -10,7 +10,6 @@ import {
   disabled,
   hidden,
   submit,
-  requiredError,
 } from '@angular/forms/signals';
 
 interface ProfileData {
@@ -70,7 +69,7 @@ export class SignalFormsPage {
     required(pw.confirmPassword, { message: 'Please confirm password' });
     validate(pw.confirmPassword, ({ value, valueOf }) => {
       if (value() && value() !== valueOf(pw.password)) {
-        return requiredError({ message: 'Passwords do not match' });
+        return { kind: 'passwordMismatch', message: 'Passwords do not match' };
       }
       return undefined;
     });
@@ -91,11 +90,11 @@ export class SignalFormsPage {
   });
 
   readonly settingsForm = form(this.settingsModel, (s) => {
-    disabled(s.newsletterEmail, ({ valueOf }) => !valueOf(s.receiveNewsletter));
+    disabled(s.newsletterEmail, { when: ({ valueOf }) => !valueOf(s.receiveNewsletter) });
     required(s.newsletterEmail, { message: 'Newsletter email is required' });
     email(s.newsletterEmail, { message: 'Enter a valid email' });
 
-    hidden(s.bio, ({ valueOf }) => !valueOf(s.showBio));
+    hidden(s.bio, { when: ({ valueOf }) => !valueOf(s.showBio) });
     minLength(s.bio, 5, { message: 'Bio must be at least 5 characters' });
   });
 
@@ -131,11 +130,14 @@ export class SignalFormsPage {
   readonly profileSubmitting = computed(() => this.profileForm().submitting());
 
   async onSubmitProfile(): Promise<void> {
-    await submit(this.profileForm, async () => {
+    // Since v22 submit() resolves to a boolean: true if the action ran successfully.
+    const succeeded = await submit(this.profileForm, async () => {
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      this.submittedProfile.set(this.profileModel());
       return undefined;
     });
+    if (succeeded) {
+      this.submittedProfile.set(this.profileModel());
+    }
   }
 
   resetProfile(): void {
