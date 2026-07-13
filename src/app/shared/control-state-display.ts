@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, AbstractControl } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
   selector: 'app-control-state-display',
   imports: [JsonPipe, MatCardModule],
   templateUrl: './control-state-display.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './control-state-display.css',
 })
 export class ControlStateDisplay {
